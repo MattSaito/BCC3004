@@ -66,21 +66,21 @@ nodachi sem erros, atendendo assim a LSP.
 
 Demeter: Como exemplo da lei de demeter temos a versão errada onde há uma classe de um rio e outra de um pescador, um pescador só pode pescar em um rio se sua água
 for limpa e para isto devemos verificar tal condição para isto considere esta parte do código : 
-```
+```python
 def fishing(self):
-if self.river.water == "clean": # Directly accessing the water attribute of the River instance
-while self.baits > 0:
-self.get_fish()
-self.baits -= 1
+    if self.river.water == "clean":  # Directly accessing the water attribute of the River instance
+        while self.baits > 0:
+            self.get_fish()
+            self.baits -= 1
 ```
 perceba que ao verificar se a água esta limpa estamos basicamente fazendo fisher.river.water o que fere a lei de demeter pois um pescador (fisher) não deve ter acesso
 a classe rio diretamente, pois ele acaba obtendo as informações da classe rio, para isto no código corrigido utilizamos uma nova função implementada na classe rio que
 verifica se a água está limpa e ao invés de acessarmos o rio diretamente para verificar a água, utilizamos este novo método como podemos ver:
-```
+```python
 def fishing(self, river):
-if river.is_clean(): # Using a method of River class instead of directly accessing attributes
-while self.baits > 0:
-self.get_fish()
-self.baits -= 1
+    if river.is_clean():  # Using a method of River class instead of directly accessing attributes
+        while self.baits > 0:
+            self.get_fish()
+            self.baits -= 1
 ```
 agora o acesso não é mais direto e a classe pescador não acessa mais os dados da classe rio, respeitando assim a lei de demeter.
